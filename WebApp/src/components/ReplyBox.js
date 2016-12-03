@@ -3,7 +3,7 @@ import {connect} from "react-redux"
 
 export class ReplyBox extends React.Component {
     state = {
-        text: ""
+        text: "Your message here!"
     }
 
     updateText = (e) => {
@@ -18,9 +18,8 @@ export class ReplyBox extends React.Component {
     render () {
         return (
             <div>
-
-                {/* Exercise 2: Render a text input and a button */}
-
+                <input value = {this.state.text} onChange={this.updateText}/>
+                <button onClick={this.sendReply}>Send</button>
             </div>
         )
     }
