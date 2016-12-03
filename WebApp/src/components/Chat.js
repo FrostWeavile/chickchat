@@ -7,7 +7,7 @@ export class Chat extends React.Component {
     render () {
         return (
             <div style={rootStyle}>
-                <ul style={ulStyle}>
+                <ul style={ulStyle} ref="messages">
                     {this.props.messages.map(renderMessage)}
                 </ul>
                 <ReplyBox/>
@@ -15,6 +15,17 @@ export class Chat extends React.Component {
 
             </div>
         )
+    }
+
+    componentDidUpdate (prevProps) {
+        if (prevProps.messages.length === this.props.messages.length) {
+            return
+        }
+
+        const element = this.refs.messages
+        if (element) {
+            element.scrollTop = element.scrollHeight
+        }
     }
 }
 
