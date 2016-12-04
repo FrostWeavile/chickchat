@@ -31,10 +31,11 @@ export class Chat extends React.Component {
 
 function renderMessage (message) {
     return (
-        <li key={message.messageId}>
-          <img src =   {message.author.picture} height = "64" />
+        <li style={{backgroundColor: "lightgreen", margin: 0, wordBreak: "break-all"}} key={message.messageId}>
 
-            {message.author.name + ":"}
+
+          <img src =   {message.author.picture} style={{borderRadius: "50%"}} height = "64" />
+            {message.author.name + ": "}
 
             {getMessageBody(message)}
         </li>
@@ -43,7 +44,9 @@ function renderMessage (message) {
 
 const ulStyle = {
     overflowY: "scroll",
-
+    listStyle: "none",
+    paddingLeft: 0,
+    paddingUps: 0
     /* Exercise 4: Add your own styles */
 
 }
@@ -52,13 +55,14 @@ const imageStyle = {
     maxWidth: "100px",
     maxHeight: "100px",
     objectFit: "contain"
+
 }
 
 const rootStyle = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
-    height: "100%"
+    height: "100%",
 }
 
 function getMessageDate (message) {
@@ -69,7 +73,11 @@ function getMessageBody (message) {
     if (message.data) {
         return <img src={message.data} style={imageStyle} />
     } else {
-        return message.text
+        return(
+        <span style={{ fontFamily: "Courier", color:"#071907"}}>
+        {message.text}
+        </span>
+      )
     }
 }
 
@@ -77,12 +85,12 @@ Chat.propTypes = {
     messages: PropTypes.array
 }
 
+
 function mapStateToProps (state) {
     return {
         messages: state.messages
     }
 }
-
 export default connect(
     mapStateToProps
 )(Chat)
